@@ -1,0 +1,81 @@
+.main {
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.field {
+    margin: 0 auto;
+    width: 45vw;
+    height: 45vw;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: 25%;
+    background: rgba(0, 210, 255, 0.2);
+    border-radius: 20px;
+}
+
+.cell {
+    font-weight: bold;
+    font-size: 50px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    background: rgba(0, 210, 255, 0.3);
+    border-radius: 20px;
+}
+
+.cell:hover:not(.empty) {
+    background: rgba(0, 210, 255, 0.5);
+    cursor: pointer;
+}
+
+.cell.empty {
+    background: transparent;
+    cursor: pointer;
+}
+
+.cell span {
+    vertical-align: middle;
+    display: flex;
+    margin: 0 auto;
+}
+
+.debug-panel {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid red;
+    border-radius: 5px;
+}
+
+.info-panel {
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 20px 40px;
+    display: inline-block;
+    font-size: 25px;
+    max-width: 200px;
+}
+
+.info-panel > div {
+    padding-bottom: 15px;
+}
+
+.game-over {
+    text-align: center;
+}
+
+.game-over p {
+    font-size: 20px;
+}
+
+.copyright {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    padding: 10px 20px;
+}

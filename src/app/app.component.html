@@ -1,0 +1,29 @@
+<div class="container-fluid">
+    <div class="main">
+        <div class="field" *ngIf="!isGameOver()">
+            <div class="cell"
+                 *ngFor="let cell of field; let i = index;"
+                 (click)="clickCell(i)" [class.empty]="cell == 0"
+            >
+                <span>{{cell ? cell : '&nbsp;'}}</span>
+            </div>
+        </div>
+        <div class="info-panel" *ngIf="!isGameOver()">
+            <div>Score: <b>{{steps}}</b></div>
+            <div>
+                <div class="btn btn-default" (click)="init(4)">Restart</div>
+            </div>
+        </div>
+        <div class="game-over" *ngIf="isGameOver()">
+            <h1>Congratulations!</h1>
+            <p>Your score is <b>{{steps}}</b></p>
+            <div class="btn btn-default" (click)="init(4)">Restart</div>
+        </div>
+    </div>
+</div>
+<!--<div class="debug-panel">-->
+    <!--<button (click)="field = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 0, 14, 15];">Set pre-end game</button>-->
+<!--</div>-->
+<div class="copyright">
+    <a href="https://github.com/tapahbl4" target="_blank">&copy; 2019, Dmitry Marchenko</a>
+</div>
