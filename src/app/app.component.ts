@@ -48,20 +48,44 @@ export class AppComponent {
 
     checkCell(index: number): boolean|Direction {
         if (this.field[index] == CELL_EMPTY) return false;
-        if (index >= this.width && this.field[index - this.width] == CELL_EMPTY) return Direction.UP;
-        if ((this.width * this.width - 1) - index >= this.width && this.field[index + this.width] == CELL_EMPTY) return Direction.DOWN;
-        if (index > 0 && this.field[index - 1] == CELL_EMPTY) return Direction.LEFT;
-        if ((index < (this.width * this.width) - 1) && this.field[index + 1] == CELL_EMPTY) return Direction.RIGHT;
+
+        let line = Math.floor(index / this.width),
+            xStart = line * this.width,
+            xEnd = (line + 1) * this.width,
+            yStart = index - xStart,
+            yEnd = this.width * this.width - this.width + yStart;
+
+        for (let i = xStart; i < xEnd; i++) {
+            if (this.field[i] == CELL_EMPTY) {
+                return i > index ? Direction.RIGHT : Direction.LEFT;
+            }
+        }
+
+        for (let i = yStart; i <= yEnd; i += this.width) {
+            if (this.field[i] == CELL_EMPTY) {
+                return i > index ? Direction.DOWN : Direction.UP
+            }
+        }
+
         return false;
     }
 
     move(index: number, direction: Direction|boolean) {
         if (direction !== false) {
             let sign = (direction === Direction.LEFT || direction === Direction.UP) ? -1 : 1,
-                value = (direction === Direction.LEFT || direction === Direction.RIGHT) ? 1 : this.width;
+                value = (direction === Direction.LEFT || direction === Direction.RIGHT) ? 1 : this.width,
+                inc = value * sign,
+                i = index + inc,
+                tmp = this.field[index];
 
-            this.field[index + sign * value] = this.field[index];
             this.field[index] = CELL_EMPTY;
+
+            do {
+                let localTmp = this.field[i];
+                this.field[i] = tmp;
+                tmp = localTmp;
+                i += inc;
+            } while (tmp != CELL_EMPTY);
 
             this.steps++;
         }
@@ -69,13 +93,6 @@ export class AppComponent {
 
     isGameOver(): boolean {
         return JSON.stringify(this.field) === JSON.stringify(this.original);
-    }
-
-    clickCell(index: number) {
-        let direction = this.checkCell(index);
-        if (direction !== false) {
-            this.move(index, direction);
-        }
     }
 
     setWidth(value: any) {
