@@ -8,8 +8,8 @@
     width: 45vw;
     height: 45vw;
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-    grid-template-rows: 25%;
+    /*grid-template-columns: 25% 25% 25% 25%;*/
+    /*grid-template-rows: 25%;*/
     background: rgba(0, 210, 255, 0.2);
     border-radius: 20px;
 }
@@ -41,16 +41,6 @@
     margin: 0 auto;
 }
 
-.debug-panel {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    display: inline-block;
-    padding: 10px;
-    border: 1px solid red;
-    border-radius: 5px;
-}
-
 .info-panel {
     position: fixed;
     left: 0;
@@ -58,7 +48,7 @@
     padding: 20px 40px;
     display: inline-block;
     font-size: 25px;
-    max-width: 200px;
+    max-width: 300px;
 }
 
 .info-panel > div {
@@ -73,9 +63,16 @@
     font-size: 20px;
 }
 
-.copyright {
+.copyright, .version {
     position: fixed;
-    right: 0;
-    bottom: 0;
     padding: 10px 20px;
+    bottom: 0;
+}
+
+.copyright {
+    right: 0;
+}
+
+.version {
+    left: 0;
 }

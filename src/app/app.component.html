@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="main">
-        <div class="field" *ngIf="!isGameOver()">
+        <div class="field" *ngIf="!isGameOver()" [style.grid-template-rows]="generateCss(100 / width)" [style.grid-template-columns]="generateCss(100 / width, width)">
             <div class="cell"
                  *ngFor="let cell of field; let i = index;"
                  (click)="clickCell(i)" [class.empty]="cell == 0"
@@ -11,7 +11,13 @@
         <div class="info-panel" *ngIf="!isGameOver()">
             <div>Score: <b>{{steps}}</b></div>
             <div>
-                <div class="btn btn-default" (click)="init(4)">Restart</div>
+                <label for="width">Size</label>
+                <select name="width" id="width" class="form-control" (change)="setWidth($event.target.value)">
+                    <option *ngFor="let item of [4,5,6,7,8,9];" value="{{item}}">{{item}}</option>
+                </select>
+            </div>
+            <div>
+                <div class="btn btn-default" (click)="init(newWidth)">Restart</div>
             </div>
         </div>
         <div class="game-over" *ngIf="isGameOver()">
@@ -21,9 +27,9 @@
         </div>
     </div>
 </div>
-<!--<div class="debug-panel">-->
-    <!--<button (click)="field = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 0, 14, 15];">Set pre-end game</button>-->
-<!--</div>-->
+<div class="version">
+    <a href="https://github.com/tapahbl4/game15/releases/tag/v1.0.1" target="_blank">v1.0.1</a>
+</div>
 <div class="copyright">
     <a href="https://github.com/tapahbl4" target="_blank">&copy; 2019, Dmitry Marchenko</a>
 </div>

@@ -13,9 +13,10 @@ export class AppComponent {
     original: number[];
     field: number[];
     steps: number;
+    newWidth: number = 4;
 
     constructor() {
-        this.init(4);
+        this.init(this.newWidth);
     }
 
     init(width: number) {
@@ -75,5 +76,13 @@ export class AppComponent {
         if (direction !== false) {
             this.move(index, direction);
         }
+    }
+
+    setWidth(value: any) {
+        this.newWidth = Number(value);
+    }
+
+    generateCss(expr: string, replicate: number = 1) {
+        return (expr + '%').repeat(replicate);
     }
 }
