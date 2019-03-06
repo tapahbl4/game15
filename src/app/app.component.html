@@ -19,7 +19,7 @@
             <div class="cell"
                  *ngFor="let cell of field; let i = index;"
                  (click)="this.move(i, this.checkCell(i));" [class.empty]="cell == 0"
-                 [style.fontSize]="(20 / width) + 'vw'"
+                 [style.fontSize]="(30 / width) + 'vw'"
             >
                 <span>{{cell ? cell : '&nbsp;'}}</span>
             </div>
