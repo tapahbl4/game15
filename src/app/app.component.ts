@@ -9,14 +9,13 @@ enum Direction {LEFT = 'left', RIGHT = 'right', UP = 'up', DOWN = 'down'}
     styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-    width: number;
+    width: number = 4;
     original: number[];
     field: number[];
     steps: number;
-    newWidth: number = 4;
 
     constructor() {
-        this.init(this.newWidth);
+        this.init(this.width);
     }
 
     init(width: number) {
@@ -29,21 +28,10 @@ export class AppComponent {
         }
 
         this.field = Object.assign([], this.original);
-        this.field = this.shuffle(this.field);
+        // @ts-ignore
+        this.field.shuffle();
         this.original.push(CELL_EMPTY);
         this.field.push(CELL_EMPTY);
-    }
-
-    shuffle(array: any[]): any[] {
-        let currentIndex = array.length, temporaryValue, randomIndex;
-        while (0 !== currentIndex) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex -= 1;
-            temporaryValue = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temporaryValue;
-        }
-        return array;
     }
 
     checkCell(index: number): boolean|Direction {
@@ -93,10 +81,6 @@ export class AppComponent {
 
     isGameOver(): boolean {
         return JSON.stringify(this.field) === JSON.stringify(this.original);
-    }
-
-    setWidth(value: any) {
-        this.newWidth = Number(value);
     }
 
     generateCss(expr: string, replicate: number = 1) {

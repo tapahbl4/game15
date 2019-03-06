@@ -1,3 +1,16 @@
+/* Mobile devices */
+@media all and (max-width: 960px) {
+    .field {
+        width: 45vh !important;
+        height: 45vh !important;
+    }
+
+    .info-panel {
+        width: 45vh !important;
+    }
+}
+
+/* Common */
 .main {
     margin: 0 auto;
     padding: 20px 0;
@@ -8,15 +21,12 @@
     width: 45vw;
     height: 45vw;
     display: grid;
-    /*grid-template-columns: 25% 25% 25% 25%;*/
-    /*grid-template-rows: 25%;*/
     background: rgba(0, 210, 255, 0.2);
     border-radius: 20px;
 }
 
 .cell {
     font-weight: bold;
-    font-size: 50px;
     position: relative;
     display: flex;
     align-items: center;
@@ -42,13 +52,9 @@
 }
 
 .info-panel {
-    position: fixed;
-    left: 0;
-    top: 0;
-    padding: 20px 40px;
-    display: inline-block;
+    margin: 0 auto;
+    width: 45vw;
     font-size: 25px;
-    max-width: 300px;
 }
 
 .info-panel > div {
