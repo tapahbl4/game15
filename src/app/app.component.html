@@ -2,12 +2,12 @@
     <div class="main">
         <div class="info-panel" *ngIf="!isGameOver()">
             <div class="row">
-                <div class="col-xs-5 text-left">
+                <div class="col-xs-5 text-left left">
                     <div>Score: <b>{{steps}}</b></div>
                 </div>
-                <div class="col-xs-7 text-right">
+                <div class="col-xs-7 text-right right">
                     <div class="btn-group">
-                        <div class="btn btn-default" [class.active]="item == width" *ngFor="let item of [4,5,6,7,8,9];" (click)="init(item);">{{item}}</div>
+                        <div class="btn btn-sm btn-default" [class.active]="item == width" *ngFor="let item of [4,5,6,7,8,9];" (click)="init(item);">{{item}}</div>
                     </div>
                 </div>
             </div>
@@ -19,7 +19,7 @@
             <div class="cell"
                  *ngFor="let cell of field; let i = index;"
                  (click)="this.move(i, this.checkCell(i));" [class.empty]="cell == 0"
-                 [style.fontSize]="(30 / width) + 'vw'"
+                 [style.fontSize]="(30 / width) + 'vmin'"
             >
                 <span>{{cell ? cell : '&nbsp;'}}</span>
             </div>

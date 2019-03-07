@@ -1,12 +1,16 @@
 /* Mobile devices */
 @media all and (max-width: 960px) {
     .field {
-        width: 85vw !important;
-        height: 85vw !important;
+        width: 90vw !important;
+        height: 90vw !important;
     }
 
     .info-panel {
-        width: 85vw !important;
+        width: 90vw !important;
+    }
+
+    .cell {
+        margin: 4px !important;
     }
 }
 
@@ -18,11 +22,11 @@
 
 .field {
     margin: 0 auto;
-    width: 85vh;
-    height: 85vh;
+    width: 80vh;
+    height: 80vh;
     display: grid;
     background: rgba(0, 210, 255, 0.2);
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .cell {
@@ -32,7 +36,7 @@
     align-items: center;
     margin: 10px;
     background: rgba(0, 210, 255, 0.3);
-    border-radius: 20px;
+    border-radius: 10%;
 }
 
 .cell:hover:not(.empty) {
@@ -53,12 +57,21 @@
 
 .info-panel {
     margin: 0 auto;
-    width: 85vh;
-    font-size: 25px;
+    width: 80vh;
+    font-size: 20px;
 }
 
 .info-panel > div {
     padding-bottom: 15px;
+}
+
+.info-panel .left {
+    padding-right: 0 !important;
+    line-height: 30px;
+}
+
+.info-panel .right {
+    padding-left: 0 !important;
 }
 
 .game-over {
