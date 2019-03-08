@@ -5,7 +5,8 @@ This project based on Angular 7.3.4
 
 # Releases
 
-* 1.0.3 Fix mobile devices style
+* 1.0.4 Removed unsolvable generations
+* 1.0.3 Fixed mobile devices style
 * 1.0.2 Added moving multiple cells in one step
 * 1.0.1 Added field size selection
 * 1.0.0 First Release

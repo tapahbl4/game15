@@ -28,8 +28,11 @@ export class AppComponent {
         }
 
         this.field = Object.assign([], this.original);
-        // @ts-ignore
-        this.field.shuffle();
+        do {
+            // @ts-ignore
+            this.field.shuffle();
+        } while (this.checkField());
+
         this.original.push(CELL_EMPTY);
         this.field.push(CELL_EMPTY);
     }
@@ -85,5 +88,15 @@ export class AppComponent {
 
     generateCss(expr: string, replicate: number = 1) {
         return (expr + '%').repeat(replicate);
+    }
+
+    checkField(): boolean {
+        let sum = 0;
+        this.field.map((value, index, array) => {
+            if (value == CELL_EMPTY || index + 1 == array.length) return;
+            let copy = Object.assign([], array).slice(index + 1);
+            copy.map(value1 => sum += (value1 > value ? 1 : 0));
+        });
+        return sum % 2 == 0;
     }
 }
