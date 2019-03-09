@@ -97,6 +97,6 @@ export class AppComponent {
             let copy = Object.assign([], array).slice(index + 1);
             copy.map(value1 => sum += (value1 > value ? 1 : 0));
         });
-        return sum % 2 == 0;
+        return (sum + this.width) % 2 == 0;
     }
 }
