@@ -1,39 +1,39 @@
 <div class="container-fluid">
-    <div class="main">
-        <div class="info-panel" *ngIf="!isGameOver()">
-            <div class="row">
-                <div class="col-xs-5 text-left left">
-                    <div>Score: <b>{{steps}}</b></div>
-                </div>
-                <div class="col-xs-7 text-right right">
-                    <div class="btn-group">
-                        <div class="btn btn-sm btn-default" [class.active]="item == width" *ngFor="let item of [4,5,6,7,8,9];" (click)="init(item);">{{item}}</div>
-                    </div>
-                </div>
-            </div>
+  <div class="main">
+    <div class="info-panel" *ngIf="!isGameOver()">
+      <div class="row">
+        <div class="col-xs-5 text-left left">
+          <div>Score: <b>{{steps}}</b></div>
         </div>
-        <div class="field" *ngIf="!isGameOver()"
-             [style.grid-template-rows]="generateCss(100 / width)"
-             [style.grid-template-columns]="generateCss(100 / width, width)"
-        >
-            <div class="cell"
-                 *ngFor="let cell of field; let i = index;"
-                 (click)="this.move(i, this.checkCell(i));" [class.empty]="cell == 0"
-                 [style.fontSize]="(30 / width) + 'vmin'"
-            >
-                <span>{{cell ? cell : '&nbsp;'}}</span>
-            </div>
+        <div class="col-xs-7 text-right right">
+          <div class="btn-group">
+            <div class="btn btn-sm btn-default" [class.active]="item == width" *ngFor="let item of [4,5,6,7,8,9];" (click)="init(item);">{{item}}</div>
+          </div>
         </div>
-        <div class="game-over" *ngIf="isGameOver()">
-            <h1>Congratulations!</h1>
-            <p>Your score is <b>{{steps}}</b></p>
-            <div class="btn btn-default" (click)="init(width)">Restart</div>
-        </div>
+      </div>
     </div>
+    <div class="field" *ngIf="!isGameOver()"
+         [style.grid-template-rows]="generateCss(100 / width)"
+         [style.grid-template-columns]="generateCss(100 / width, width)"
+    >
+      <div class="cell"
+           *ngFor="let cell of field; let i = index;"
+           (click)="this.move(i, this.checkCell(i));" [class.empty]="cell == 0"
+           [style.fontSize]="(30 / width) + 'vmin'"
+      >
+        <span>{{cell ? cell : '&nbsp;'}}</span>
+      </div>
+    </div>
+    <div class="game-over" *ngIf="isGameOver()">
+      <h1>Congratulations!</h1>
+      <p>Your score is <b>{{steps}}</b></p>
+      <div class="btn btn-default" (click)="init(width)">Restart</div>
+    </div>
+  </div>
 </div>
 <div class="version">
-    <a href="https://github.com/tapahbl4/game15/releases/tag/v1.0.4" target="_blank">v1.0.4</a>
+  <a href="{{info.author.url}}/{{info.name}}/releases/tag/v{{info.version}}" target="_blank">v{{info.version}}</a>
 </div>
 <div class="copyright">
-    <a href="https://github.com/tapahbl4" target="_blank">&copy; 2019, Dmitry Marchenko</a>
+  <a href="{{info.author.url}}" target="_blank">&copy; {{info.year}}, {{info.author.name}}</a>
 </div>
