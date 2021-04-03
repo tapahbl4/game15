@@ -9,6 +9,7 @@ This project based on Angular 11
 
 # Releases
 
+* 1.0.6 Add icons & PWA configs
 * 1.0.5 Upgrade to Angular 11
 * 1.0.4 Removed unsolvable generations
 * 1.0.3 Fixed mobile devices style

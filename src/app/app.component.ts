@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import package_config from '../../package.json';
+import { PwaService } from "./pwa.service";
 
 const CELL_EMPTY = 0;
 enum Direction {LEFT = 'left', RIGHT = 'right', UP = 'up', DOWN = 'down'}
@@ -21,9 +22,12 @@ export class AppComponent {
     year: new Date().getFullYear(),
   };
 
-  constructor() {
-    console.log(this.info);
+  constructor(public Pwa: PwaService) {
     this.init(this.width);
+  }
+
+  installPwa(): void {
+    this.Pwa.promptEvent.prompt();
   }
 
   init(width: number): void {
