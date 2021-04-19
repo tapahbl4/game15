@@ -1,0 +1,8 @@
+{
+  "score": "Score",
+  "hiscore": "Hi-Score",
+  "game_over_title": "Congratulations!",
+  "game_over_message": "Your score is",
+  "game_over_hiscore": "It's new Hi-Score",
+  "restart": "Restart"
+}

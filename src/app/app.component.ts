@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import package_config from '../../package.json';
-import { PwaService } from "./pwa.service";
+import {PwaService} from "./pwa.service";
+import {HISCORE_ZERO, STORAGE_KEYS, StorageService} from "./storage.service";
+import { TranslateService } from '@ngx-translate/core';
+import {environment} from "../environments/environment.prod";
 
 const CELL_EMPTY = 0;
 enum Direction {LEFT = 'left', RIGHT = 'right', UP = 'up', DOWN = 'down'}
@@ -15,6 +18,8 @@ export class AppComponent {
   original: number[];
   field: number[];
   steps: number;
+  hiscore: number;
+  newHiscore: boolean;
   info: any = {
     author: package_config.author,
     version: package_config.version,
@@ -22,7 +27,10 @@ export class AppComponent {
     year: new Date().getFullYear(),
   };
 
-  constructor(public Pwa: PwaService) {
+  constructor(public Pwa: PwaService, public storage: StorageService, public translate: TranslateService) {
+    translate.addLangs(environment.locales);
+    translate.setDefaultLang(environment.defaultLocale);
+    translate.use(translate.getBrowserLang());
     this.init(this.width);
   }
 
@@ -34,6 +42,8 @@ export class AppComponent {
     this.steps = 0;
     this.width = width;
     this.original = [];
+    this.hiscore = JSON.parse(this.storage.get(STORAGE_KEYS.HISCORE)) || HISCORE_ZERO;
+    this.newHiscore = false;
 
     for (let i = 0; i < (width * width) - 1; i++) {
       this.original.push(i + 1);
@@ -48,8 +58,8 @@ export class AppComponent {
     this.field.push(CELL_EMPTY);
   }
 
-    checkCell(index: number): boolean|Direction {
-      if (this.field[index] == CELL_EMPTY) return false;
+  checkCell(index: number): boolean|Direction {
+    if (this.field[index] == CELL_EMPTY) return false;
 
     let line = Math.floor(index / this.width),
       xStart = line * this.width,
@@ -94,10 +104,20 @@ export class AppComponent {
   }
 
   isGameOver(): boolean {
-    return JSON.stringify(this.field) === JSON.stringify(this.original);
+    let result = JSON.stringify(this.field) === JSON.stringify(this.original);
+    if (result) {
+      if (this.hiscore[this.width] > this.steps || this.hiscore[this.width] === 0) {
+        if (this.hiscore[this.width] > 0) {
+          this.newHiscore = true;
+        }
+        this.hiscore[this.width] = this.steps;
+        this.storage.set(STORAGE_KEYS.HISCORE, JSON.stringify(this.hiscore));
+      }
+    }
+    return result;
   }
 
-  generateCss(expr: string, replicate: number = 1) {
+  generateCss(expr: any, replicate: number = 1) {
     return (expr + '%').repeat(replicate);
   }
 

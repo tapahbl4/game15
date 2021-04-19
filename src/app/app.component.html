@@ -1,17 +1,5 @@
 <div class="container-fluid">
   <div class="main">
-    <div class="info-panel" *ngIf="!isGameOver()">
-      <div class="row">
-        <div class="col-xs-5 text-left left">
-          <div>Score: <b>{{steps}}</b></div>
-        </div>
-        <div class="col-xs-7 text-right right">
-          <div class="btn-group">
-            <div class="btn btn-sm btn-default" [class.active]="item == width" *ngFor="let item of [4,5,6,7,8,9];" (click)="init(item);">{{item}}</div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="field" *ngIf="!isGameOver()"
          [style.grid-template-rows]="generateCss(100 / width)"
          [style.grid-template-columns]="generateCss(100 / width, width)"
@@ -24,10 +12,24 @@
         <span>{{cell ? cell : '&nbsp;'}}</span>
       </div>
     </div>
+    <div class="info-panel" *ngIf="!isGameOver()">
+      <div class="row">
+        <div class="col-xs-5 text-left left">
+          <div>{{ 'score' | translate}}: <b>{{steps}}</b></div>
+          <div *ngIf="hiscore[width] > 0">{{ 'hiscore' | translate}}: <b>{{hiscore[width]}}</b></div>
+        </div>
+        <div class="col-xs-7 text-right right">
+          <div class="btn-group">
+            <div class="btn btn-sm btn-default" [class.active]="item == width" *ngFor="let item of [4,5,6,7,8,9];" (click)="init(item);">{{item}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="game-over" *ngIf="isGameOver()">
-      <h1>Congratulations!</h1>
-      <p>Your score is <b>{{steps}}</b></p>
-      <div class="btn btn-default" (click)="init(width)">Restart</div>
+      <h1 translate>game_over_title</h1>
+      <p *ngIf="newHiscore" translate>game_over_hiscore</p>
+      <p>{{ 'game_over_message' | translate}} <b>{{steps}}</b></p>
+      <div class="btn btn-default" (click)="init(width)" translate>restart</div>
     </div>
   </div>
 </div>
