@@ -6,5 +6,6 @@
   "game_over_hiscore": "It's new Hi-Score",
   "restart": "Restart",
   "update_message": "New version available. Press OK for download",
-  "installed_message": "Thanks for installation"
+  "installed_message": "Thanks for installation",
+  "image_mode": "Image Mode"
 }

@@ -6,5 +6,6 @@
   "game_over_hiscore": "Установлен новый рекорд",
   "restart": "Заново",
   "update_message": "Доступна новая версия. Нажмите ОК для загрузки",
-  "installed_message": "Спасибо за установку"
+  "installed_message": "Спасибо за установку",
+  "image_mode": "Режим картинки"
 }

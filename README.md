@@ -9,6 +9,7 @@ This project based on Angular 11
 
 # Releases
 
+* 1.2.0 Add image mode
 * 1.1.2 Translate update message, Add metrics
 * 1.1.1 Fix update function
 * 1.1.0 Add Hi-scores & i18n

@@ -3,11 +3,15 @@
     <div class="field" *ngIf="!isGameOver()"
          [style.grid-template-rows]="generateCss(100 / width)"
          [style.grid-template-columns]="generateCss(100 / width, width)"
+         [class.image-mode]="imageMode"
+         #fieldPresentation
     >
       <div class="cell"
            *ngFor="let cell of field; let i = index;"
            (click)="this.move(i, this.checkCell(i));" [class.empty]="cell == 0"
-           [style.fontSize]="(30 / width) + 'vmin'"
+           [style.font-size]="(30 / width) + 'vmin'"
+           [style.background-position]="generateImage(cell)"
+           [style.background-size]="'calc(100% * ' + width + ')'"
       >
         <span>{{cell ? cell : '&nbsp;'}}</span>
       </div>
@@ -22,6 +26,12 @@
           <div class="btn-group">
             <div class="btn btn-sm btn-default" [class.active]="item == width" *ngFor="let item of [4,5,6,7,8,9];" (click)="init(item);">{{item}}</div>
           </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-9 text-left left image-mode-title" translate>image_mode</div>
+        <div class="col-xs-3 text-right right">
+          <div class="toggle" [class.on]="imageMode" (click)="imageMode = !imageMode;" [@toggleAnimation]="imageMode ? 'on' : 'off'"></div>
         </div>
       </div>
     </div>

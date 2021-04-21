@@ -23,7 +23,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
       enabled: environment.production,
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    BrowserModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

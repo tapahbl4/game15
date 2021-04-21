@@ -1,9 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import package_config from '../../package.json';
+import {environment} from "../environments/environment.prod";
 import {PwaService} from "./pwa.service";
 import {HISCORE_ZERO, STORAGE_KEYS, StorageService} from "./storage.service";
-import { TranslateService } from '@ngx-translate/core';
-import {environment} from "../environments/environment.prod";
+import {TranslateService} from '@ngx-translate/core';
 
 const CELL_EMPTY = 0;
 enum Direction {LEFT = 'left', RIGHT = 'right', UP = 'up', DOWN = 'down'}
@@ -20,18 +20,25 @@ export class AppComponent {
   steps: number;
   hiscore: number;
   newHiscore: boolean;
+  imageMode: boolean;
+  imageModeWidth: number;
   info: any = {
     author: package_config.author,
     version: package_config.version,
     name: package_config.name,
     year: new Date().getFullYear(),
   };
+  @ViewChild('fieldPresentation') fieldPresentation: ElementRef;
 
   constructor(public Pwa: PwaService, public storage: StorageService, public translate: TranslateService) {
     translate.addLangs(environment.locales);
     translate.setDefaultLang(environment.defaultLocale);
     translate.use(translate.getBrowserLang());
     this.init(this.width);
+  }
+
+  ngAfterViewInit() {
+    this.imageModeWidth = this.fieldPresentation.nativeElement.offsetWidth;
   }
 
   installPwa(): void {
@@ -44,6 +51,8 @@ export class AppComponent {
     this.original = [];
     this.hiscore = JSON.parse(this.storage.get(STORAGE_KEYS.HISCORE)) || HISCORE_ZERO;
     this.newHiscore = false;
+    this.imageMode = this.imageMode || false;
+    this.imageModeWidth = this.imageModeWidth || 0;
 
     for (let i = 0; i < (width * width) - 1; i++) {
       this.original.push(i + 1);
@@ -56,6 +65,9 @@ export class AppComponent {
 
     this.original.push(CELL_EMPTY);
     this.field.push(CELL_EMPTY);
+    // FOR DEV & DEBUG
+    // this.field[(this.width * this.width) - 1] = this.field[(this.width * this.width) - 2];
+    // this.field[(this.width * this.width) - 2] = CELL_EMPTY;
   }
 
   checkCell(index: number): boolean|Direction {
@@ -119,6 +131,11 @@ export class AppComponent {
 
   generateCss(expr: any, replicate: number = 1) {
     return (expr + '%').repeat(replicate);
+  }
+
+  generateImage(pos: number): string {
+    let xIndex = (pos - 1) % this.width, yIndex = Math.floor((pos - 1) / this.width);
+    return (-Math.floor(this.imageModeWidth / this.width) * xIndex) + 'px ' + (-Math.floor(this.imageModeWidth / this.width) * yIndex) + 'px';
   }
 
   checkField(): boolean {

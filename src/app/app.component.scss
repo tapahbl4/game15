@@ -27,31 +27,60 @@
   display: grid;
   background: rgba(0, 210, 255, 0.2);
   border-radius: 10px;
-}
 
-.cell {
-  font-weight: bold;
-  position: relative;
-  display: flex;
-  align-items: center;
-  margin: 10px;
-  background: rgba(0, 210, 255, 0.3);
-  border-radius: 10%;
-
-  &:hover:not(.empty) {
-    background: rgba(0, 210, 255, 0.5);
-    cursor: pointer;
-  }
-
-  &.empty {
+  &.image-mode {
     background: transparent;
-    cursor: pointer;
+
+    &:before, .cell {
+      background: url(../../src/assets/image-mode/1.jpg) no-repeat;
+    }
+
+    &:before {
+      background-size: contain;
+      position: fixed;
+      width: inherit;
+      height: inherit;
+      opacity: 0.5;
+      content: '';
+      border-radius: 10px;
+    }
+
+    .cell {
+      background-origin: content-box;
+      color: transparent;
+      margin: 0 !important;
+      border-radius: 0;
+
+      //&:nth-child(1) { border-start-start-radius: 10px; }
+      //&:nth-child(4) { border-start-end-radius: 10px; }
+      //&:nth-child(13) { border-end-start-radius: 10px; }
+      //&:nth-child(16) { border-end-end-radius: 10px; }
+    }
   }
 
-  span {
-    vertical-align: middle;
+  .cell {
+    font-weight: bold;
+    position: relative;
     display: flex;
-    margin: 0 auto;
+    align-items: center;
+    margin: 10px;
+    background: rgba(0, 210, 255, 0.3);
+    border-radius: 10%;
+
+    &:hover:not(.empty) {
+      cursor: pointer;
+    }
+
+    &.empty {
+      background: none;
+      cursor: pointer;
+    }
+
+    span {
+      vertical-align: middle;
+      display: flex;
+      margin: 0 auto;
+    }
   }
 }
 
@@ -94,4 +123,42 @@
 
 .version {
   left: 0;
+}
+
+.toggle {
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  z-index: 100;
+
+  &:after {
+    background: #adadad;
+    width: 22px;
+    height: 22px;
+    position: relative;
+    top: 3px;
+    left: 3px;
+    display: block;
+    z-index: 101;
+    color: #fff;
+    border-radius: 15px;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    content: "\2613";
+  }
+
+  &.on:after {
+    background: #10bf1e;
+    left: 32px;
+    content: "\2713";
+  }
+}
+
+.image-mode-title {
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
